@@ -1,5 +1,5 @@
-
 import socket
+
 HOST = "0.0.0.0"
 PORT = 55555
 # simple ARP table
@@ -17,17 +17,17 @@ def run_server():
     print("ARP Server is running...")
 
     while True:
-                client_socket, addr = server_socket.accept()
-                ip_request = client_socket.recv(1024).decode().strip()
+        client_socket, addr = server_socket.accept()
+        ip_request = client_socket.recv(1024).decode().strip()
 
-                if ip_request in arp_table:
-                    mac = arp_table[ip_request]
-                    response = f"MAC Address of {ip_request}:: {mac}"
-                else: 
-                     response = "No IP found in ARP table."
+        if ip_request in arp_table:
+            mac = arp_table[ip_request]
+            response = f"MAC Address of {ip_request}:: {mac}"
+        else: 
+            response = "No IP found in ARP table."
 
-                client_socket.send(response.encode())
-                client_socket.close()
+        client_socket.send(response.encode())
+        client_socket.close()
 
 # program entry point
 if __name__ == " __main__":
